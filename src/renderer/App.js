@@ -8,11 +8,19 @@ import * as scenes from './scenes'
 }))
 export default class App extends React.Component {
   state = {
-    scene: 'game'
+    scene: 'home',
+    files: [__static + 'robot'],
   }
 
   render() {
+    let props = {}
+    switch (this.state.scene) {
+      case 'game': {
+        props = { files: this.state.files }
+        break
+      }
+    }
     const Component = scenes[this.state.scene]
-    return <Component setState={(data) => this.setState(data)} />
+    return <Component {...props} setState={(data) => this.setState(data)} />
   }
 }
